@@ -25,6 +25,7 @@ public class SwimCoach extends Coach {
         return Discipline.SWIMMING;
     }
 
+    //check if the coach is certified for this stroke
     @Override
     protected void checkSpecialization(Athlete athlete) throws InvalidAssignmentException {
         Swimmer swimmer = (Swimmer) athlete;

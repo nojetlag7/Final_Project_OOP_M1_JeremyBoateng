@@ -20,21 +20,22 @@ public abstract class Athlete extends Person implements PerformanceScorable, Tra
         super(id, name, dateOfBirth);
     }
 
-    /** Derived from the concrete type so an athlete can never disagree with its own class. */
+    //each subclass says which discipline it is
     public abstract Discipline getDiscipline();
 
-    /** Discipline-specific attributes, used in summaries. */
+    //the extra info shown on the athlete's line
     protected abstract String describeAttributes();
 
     public Optional<Coach> getCoach() {
         return Optional.ofNullable(coach);
     }
 
-    // Package-private: only Coach.assign may change the link, so both sides stay consistent.
+    //only Coach.assign should call this so both sides stay linked
     void setCoach(Coach coach) {
         this.coach = coach;
     }
 
+    //adding a session onto this athlete
     public void recordSession(TrainingSession session) {
         Objects.requireNonNull(session, "session");
         if (!session.getAthleteId().equals(getId())) {
@@ -48,6 +49,7 @@ public abstract class Athlete extends Person implements PerformanceScorable, Tra
         return Collections.unmodifiableList(sessions);
     }
 
+    //adding up the load between two dates
     @Override
     public int trainingLoadBetween(LocalDate fromInclusive, LocalDate toInclusive) {
         return sessions.stream()
@@ -57,6 +59,7 @@ public abstract class Athlete extends Person implements PerformanceScorable, Tra
                 .sum();
     }
 
+    //finding this athlete's most recent session
     @Override
     public Optional<LocalDate> latestSessionDate() {
         return sessions.stream()

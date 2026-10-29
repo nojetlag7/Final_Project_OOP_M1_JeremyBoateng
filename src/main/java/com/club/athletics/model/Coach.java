@@ -25,15 +25,12 @@ public abstract class Coach extends Person {
 
     public abstract Discipline getDiscipline();
 
-    /**
-     * Coach-type-specific rule, run after the shared discipline and capacity checks. The
-     * athlete is guaranteed to be of this coach's discipline when this is called.
-     */
+    //extra rule that depends on the type of coach
     protected abstract void checkSpecialization(Athlete athlete) throws InvalidAssignmentException;
 
     protected abstract String describeSpecialization();
 
-    /** Template method: the order of checks is fixed here, subclasses only add their own rule. */
+    //checking discipline, then if the coach is full, then the extra rule
     public final void validateAssignment(Athlete athlete) throws InvalidAssignmentException {
         Objects.requireNonNull(athlete, "athlete");
         if (athlete.getDiscipline() != getDiscipline()) {
@@ -47,7 +44,7 @@ public abstract class Coach extends Person {
         checkSpecialization(athlete);
     }
 
-    /** Validates, then moves the athlete from their previous coach (if any) to this one. */
+    //giving the athlete to this coach and taking them off the old one
     public void assign(Athlete athlete) throws InvalidAssignmentException {
         validateAssignment(athlete);
         if (isAssigned(athlete)) {
@@ -62,6 +59,7 @@ public abstract class Coach extends Person {
         return assignedAthletes.contains(athlete);
     }
 
+    //check to see if a coach can take more athletes
     public boolean hasCapacity() {
         return assignedAthletes.size() < maxAthletes;
     }

@@ -1,6 +1,6 @@
 package com.club.athletics.exception;
 
-/** Thrown when a row of a data file cannot be turned into a domain object. */
+//thrown when a csv row can't be read
 public class DataFormatException extends AthleteManagementException {
 
     public DataFormatException(String message) {

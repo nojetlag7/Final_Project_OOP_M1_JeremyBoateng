@@ -22,6 +22,7 @@ public class WeightliftingCoach extends Coach {
         return Discipline.WEIGHTLIFTING;
     }
 
+    //check if the lifter is under the weight class this coach can take
     @Override
     protected void checkSpecialization(Athlete athlete) throws InvalidAssignmentException {
         Weightlifter lifter = (Weightlifter) athlete;

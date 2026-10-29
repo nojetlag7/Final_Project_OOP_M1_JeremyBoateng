@@ -29,10 +29,7 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
 
-/**
- * Reads athletes, coaches and sessions from CSV. A bad row is logged and skipped so one typo
- * does not prevent the whole club from loading; a missing file is still fatal.
- */
+//reading the csv files, a bad row gets skipped but a missing file stops the app
 public class CsvDataLoader implements DataLoader {
 
     public static final String COACHES_FILE = "coaches.csv";
@@ -57,6 +54,7 @@ public class CsvDataLoader implements DataLoader {
         T parse(String[] columns) throws AthleteManagementException;
     }
 
+    //loading coaches, athletes and sessions
     @Override
     public ClubData load() throws IOException {
         skippedRows = 0;
@@ -83,6 +81,7 @@ public class CsvDataLoader implements DataLoader {
         return new ClubData(athletes, coaches, requestedAssignments, sessions, skippedRows);
     }
 
+    //reading one file and skipping lines that don't parse
     private <T> List<T> readRows(String fileName, int expectedColumns, RowParser<T> parser) throws IOException {
         List<T> results = new ArrayList<>();
         try (BufferedReader reader = new BufferedReader(source.open(fileName))) {
@@ -109,6 +108,7 @@ public class CsvDataLoader implements DataLoader {
         return results;
     }
 
+    //splitting a line and checking it has the right number of columns
     private static String[] split(String line, int expectedColumns) throws DataFormatException {
         String[] columns = line.split(",", -1);
         if (columns.length != expectedColumns) {
@@ -121,12 +121,14 @@ public class CsvDataLoader implements DataLoader {
         return columns;
     }
 
+    //making sure this id hasn't already been used
     private static void claimId(Set<String> seenIds, String id) throws DataFormatException {
         if (!seenIds.add(id)) {
             throw new DataFormatException("duplicate id '" + id + "'");
         }
     }
 
+    //building the right coach from the discipline column
     private Coach parseCoach(String[] c) throws DataFormatException {
         LocalDate dateOfBirth = parseDate(c[2], "dateOfBirth");
         Discipline discipline = parseEnum(Discipline.class, c[3], "discipline");
@@ -139,7 +141,7 @@ public class CsvDataLoader implements DataLoader {
         };
     }
 
-    // The only place that knows every concrete Athlete type; everything downstream uses Athlete.
+    //building the right athlete from the discipline column
     private Athlete parseAthlete(String[] c) throws DataFormatException {
         LocalDate dateOfBirth = parseDate(c[2], "dateOfBirth");
         Discipline discipline = parseEnum(Discipline.class, c[3], "discipline");
@@ -153,6 +155,7 @@ public class CsvDataLoader implements DataLoader {
         };
     }
 
+    //building a session from one row
     private TrainingSession parseSession(String[] c) throws AthleteManagementException {
         LocalDateTime start;
         try {

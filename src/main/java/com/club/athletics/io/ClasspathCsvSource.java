@@ -7,7 +7,7 @@ import java.io.InputStreamReader;
 import java.io.Reader;
 import java.nio.charset.StandardCharsets;
 
-/** Default source: files bundled in src/main/resources, so the app runs from any working directory. */
+//reading the csv files that are bundled with the app
 public class ClasspathCsvSource implements CsvSource {
 
     private final String folder;

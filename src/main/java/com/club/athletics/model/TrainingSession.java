@@ -6,7 +6,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Objects;
 
-/** A completed training session. Immutable because it is a historical record. */
+//one training session that already happened
 public final class TrainingSession {
 
     public static final int MIN_INTENSITY = 1;
@@ -32,7 +32,7 @@ public final class TrainingSession {
         this.intensity = intensity;
     }
 
-    /** Session load in arbitrary units (minutes x RPE), the usual sport-science measure. */
+    //calculating the load of a single training session
     public int getLoad() {
         return durationMinutes * intensity;
     }

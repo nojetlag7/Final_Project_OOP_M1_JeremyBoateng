@@ -1,8 +1,7 @@
 package com.club.athletics.model;
 
 public enum Stroke {
-    // Multipliers compensate for strokes being naturally slower than freestyle, so a strong
-    // breaststroke swimmer is not ranked below an average freestyler just because of the stroke.
+    //slower strokes get a bigger number so they aren't ranked lower just for the stroke
     FREESTYLE(1.00),
     BACKSTROKE(1.10),
     BUTTERFLY(1.05),

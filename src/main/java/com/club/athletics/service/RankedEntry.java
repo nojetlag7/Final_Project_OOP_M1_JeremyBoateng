@@ -1,5 +1,5 @@
 package com.club.athletics.service;
 
-/** One leaderboard line. Generic so any {@code PerformanceScorable} can be ranked. */
+//one line on a leaderboard
 public record RankedEntry<T>(int rank, T competitor, double score) {
 }

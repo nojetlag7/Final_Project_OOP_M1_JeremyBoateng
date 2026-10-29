@@ -3,7 +3,7 @@ package com.club.athletics.model;
 import java.time.LocalDate;
 import java.util.Objects;
 
-/** Identity shared by everyone in the club. */
+//shared info for athletes and coaches
 public abstract class Person {
 
     private final String id;
@@ -28,7 +28,7 @@ public abstract class Person {
         return dateOfBirth;
     }
 
-    /** One-line description for listings; athletes and coaches show different details. */
+    //one line for the lists, each type writes its own
     public abstract String getSummary();
 
     private static String requireText(String value, String field) {

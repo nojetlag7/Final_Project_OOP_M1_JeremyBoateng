@@ -11,10 +11,7 @@ import java.util.List;
 
 public class PerformanceService {
 
-    /**
-     * Ranks by score, best first. Equal scores share a rank and the next rank is skipped
-     * (1, 1, 3), the usual competition convention.
-     */
+    //sorting best score first, same scores share a rank
     public <T extends PerformanceScorable> List<RankedEntry<T>> rank(Collection<T> competitors) {
         List<T> sorted = competitors.stream()
                 .sorted(Comparator.comparingDouble((T c) -> c.calculatePerformanceScore()).reversed())
@@ -33,6 +30,7 @@ public class PerformanceService {
         return leaderboard;
     }
 
+    //ranking only the athletes in one discipline
     public List<RankedEntry<Athlete>> rankByDiscipline(Collection<Athlete> athletes, Discipline discipline) {
         return rank(athletes.stream()
                 .filter(athlete -> athlete.getDiscipline() == discipline)

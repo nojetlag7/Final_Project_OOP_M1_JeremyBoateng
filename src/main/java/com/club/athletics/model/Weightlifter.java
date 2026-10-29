@@ -4,7 +4,7 @@ import java.time.LocalDate;
 
 public class Weightlifter extends Athlete {
 
-    // Lifting 4x your weight class scores 100, keeping scores on the same scale as other disciplines.
+    //lifting 4 times the weight class scores 100, same scale as the others
     private static final double SCALE = 25.0;
 
     private final double weightClassKg;
@@ -25,6 +25,7 @@ public class Weightlifter extends Athlete {
         return Discipline.WEIGHTLIFTING;
     }
 
+    //calculating the score from the total lifted compared to the weight class
     @Override
     public double calculatePerformanceScore() {
         return totalLiftedKg / weightClassKg * SCALE;

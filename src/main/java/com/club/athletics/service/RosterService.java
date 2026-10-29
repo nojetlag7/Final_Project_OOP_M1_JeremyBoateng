@@ -16,7 +16,7 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.Optional;
 
-/** The club's roster: lookups, coach assignment and session logging. */
+//holds the athletes and coaches and the things you can do with them
 public class RosterService {
 
     private final Map<String, Athlete> athletesById;
@@ -59,27 +59,31 @@ public class RosterService {
         return Optional.ofNullable(coachesById.get(id));
     }
 
+    //getting the athlete, or throwing if the id doesn't exist
     public Athlete getAthleteOrThrow(String id) throws AthleteNotFoundException {
         return findAthlete(id).orElseThrow(() -> new AthleteNotFoundException(id));
     }
 
+    //getting the coach, or throwing if the id doesn't exist
     public Coach getCoachOrThrow(String id) throws CoachNotFoundException {
         return findCoach(id).orElseThrow(() -> new CoachNotFoundException(id));
     }
 
+    //getting athletes that don't have a coach yet
     public List<Athlete> getUnassignedAthletes() {
         return athletesById.values().stream()
                 .filter(athlete -> athlete.getCoach().isEmpty())
                 .toList();
     }
 
-    /** Coaches that would accept this athlete right now, for suggesting alternatives. */
+    //getting the coaches that can take this athlete
     public List<Coach> findEligibleCoaches(Athlete athlete) {
         return coachesById.values().stream()
                 .filter(coach -> canAssign(coach, athlete))
                 .toList();
     }
 
+    //check to see if this coach would accept the athlete
     private static boolean canAssign(Coach coach, Athlete athlete) {
         try {
             coach.validateAssignment(athlete);
@@ -89,6 +93,7 @@ public class RosterService {
         }
     }
 
+    //assigning a coach to an athlete using their ids
     public Coach assignCoach(String athleteId, String coachId)
             throws AthleteNotFoundException, CoachNotFoundException, InvalidAssignmentException {
         Athlete athlete = getAthleteOrThrow(athleteId);
@@ -97,6 +102,7 @@ public class RosterService {
         return coach;
     }
 
+    //saving the session if it doesn't overlap another one
     public void logSession(TrainingSession session) throws AthleteNotFoundException, SchedulingConflictException {
         Athlete athlete = getAthleteOrThrow(session.getAthleteId());
         scheduling.checkConflict(session, athlete.getSessions());

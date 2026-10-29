@@ -4,7 +4,7 @@ import java.time.LocalDate;
 
 public class Sprinter extends Athlete {
 
-    // A 10.00 s 100m with a 0.150 s reaction scores 100; faster athletes score higher.
+    //a 10.00s 100m with a 0.150 reaction scores 100, faster is higher
     private static final double REFERENCE_TIME_SECONDS = 10.0;
     private static final double REFERENCE_REACTION_SECONDS = 0.15;
     private static final double SCALE = 100.0;
@@ -27,6 +27,7 @@ public class Sprinter extends Athlete {
         return Discipline.SPRINTING;
     }
 
+    //calculating the score from the pb and the reaction time
     @Override
     public double calculatePerformanceScore() {
         return (REFERENCE_TIME_SECONDS / personalBestSeconds)

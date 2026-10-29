@@ -26,13 +26,13 @@ import java.nio.file.Path;
 import java.util.List;
 import java.util.Scanner;
 
-/** Wires the application together. Contains no business logic. */
+//starts the app
 public final class Application {
 
     private Application() {
     }
 
-    /** @param args optional folder containing athletes.csv, coaches.csv and sessions.csv */
+    //loading the files then opening the menu, a folder can be passed in
     public static void main(String[] args) {
         Logger logger = new ConsoleLogger();
         CsvSource source = args.length > 0

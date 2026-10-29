@@ -13,7 +13,7 @@ public class SprintCoach extends Coach {
         return Discipline.SPRINTING;
     }
 
-    /** Sprint coaching is not certified per event, so any sprinter is acceptable. */
+    //sprint coaches can take any sprinter
     @Override
     protected void checkSpecialization(Athlete athlete) {
     }

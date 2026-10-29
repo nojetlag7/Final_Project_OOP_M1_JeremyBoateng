@@ -28,7 +28,9 @@ class AthleteScoringTest {
 
     @Test
     void disciplineComesFromTheConcreteType() {
-        List<Athlete> athletes = List.of(sprinter("S", 10, 0.15), swimmer("W", Stroke.FREESTYLE, 25), lifter("L", 64, 200));
+        List<Athlete> athletes = List.of(sprinter("S", 10, 0.15),
+                swimmer("W", Stroke.FREESTYLE, 25),
+                lifter("L", 64, 200));
 
         assertEquals(List.of(Discipline.SPRINTING, Discipline.SWIMMING, Discipline.WEIGHTLIFTING),
                 athletes.stream().map(Athlete::getDiscipline).toList());

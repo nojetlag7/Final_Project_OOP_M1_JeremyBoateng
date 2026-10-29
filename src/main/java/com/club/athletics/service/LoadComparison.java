@@ -2,14 +2,15 @@ package com.club.athletics.service;
 
 import java.util.OptionalDouble;
 
-/** Training load of the most recent week compared with the week before it. */
+//this week's load next to last week's
 public record LoadComparison(int currentLoad, int previousLoad) {
 
+    //check to see if there was any training the week before
     public boolean hasBaseline() {
         return previousLoad > 0;
     }
 
-    /** Empty when there is no previous load, because a change from zero has no meaningful percentage. */
+    //calculating the percent change, nothing if last week was empty
     public OptionalDouble percentChange() {
         if (!hasBaseline()) {
             return OptionalDouble.empty();

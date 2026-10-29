@@ -5,7 +5,7 @@ import java.util.Objects;
 
 public class Swimmer extends Athlete {
 
-    // A 25.00 s freestyle 50m lap scores 100.
+    //a 25.00s freestyle lap scores 100
     private static final double REFERENCE_LAP_SECONDS = 25.0;
     private static final double SCALE = 100.0;
 
@@ -26,6 +26,7 @@ public class Swimmer extends Athlete {
         return Discipline.SWIMMING;
     }
 
+    //calculating the score from the lap time and the stroke
     @Override
     public double calculatePerformanceScore() {
         return (REFERENCE_LAP_SECONDS / bestLapSeconds) * stroke.getScoreMultiplier() * SCALE;

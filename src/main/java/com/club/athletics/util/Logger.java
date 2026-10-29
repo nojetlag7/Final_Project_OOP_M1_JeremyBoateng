@@ -1,6 +1,6 @@
 package com.club.athletics.util;
 
-/** Single abstract method so tests can capture messages with a lambda. */
+//somewhere to send log messages
 @FunctionalInterface
 public interface Logger {
 

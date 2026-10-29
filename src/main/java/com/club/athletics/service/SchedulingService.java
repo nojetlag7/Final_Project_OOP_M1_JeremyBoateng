@@ -6,13 +6,10 @@ import com.club.athletics.model.TrainingSession;
 import java.util.Collection;
 import java.util.Optional;
 
-/** An athlete cannot be in two sessions at once. */
+//an athlete can't be in two sessions at the same time
 public class SchedulingService {
 
-    /**
-     * Sessions are half-open {@code [start, end)} windows, so a session may start exactly when the
-     * previous one ends.
-     */
+    //looking for a session that overlaps this one, back to back is fine
     public Optional<TrainingSession> findConflict(TrainingSession candidate, Collection<TrainingSession> existing) {
         return existing.stream()
                 .filter(other -> other.getAthleteId().equals(candidate.getAthleteId()))
@@ -21,6 +18,7 @@ public class SchedulingService {
                 .findFirst();
     }
 
+    //throwing if the new session overlaps an existing one
     public void checkConflict(TrainingSession candidate, Collection<TrainingSession> existing)
             throws SchedulingConflictException {
         Optional<TrainingSession> conflict = findConflict(candidate, existing);

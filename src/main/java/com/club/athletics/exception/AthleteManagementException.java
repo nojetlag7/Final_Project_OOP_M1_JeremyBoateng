@@ -1,9 +1,6 @@
 package com.club.athletics.exception;
 
-/**
- * Base type for every business rule violation in the application, so the console loop can
- * report any domain error in one place without also catching programming errors.
- */
+//base exception for when a club rule is broken
 public class AthleteManagementException extends Exception {
 
     public AthleteManagementException(String message) {

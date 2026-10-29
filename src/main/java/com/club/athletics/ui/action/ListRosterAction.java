@@ -26,7 +26,7 @@ public class ListRosterAction implements MenuAction {
         printSection(io, "Athletes", roster.getAthletes());
     }
 
-    // Works on Person so coaches and athletes each print their own summary format.
+    //printing a list, coaches and athletes each use their own summary
     private static void printSection(ConsoleIO io, String title, List<? extends Person> people) {
         io.println("");
         io.println(title + " (" + people.size() + "):");

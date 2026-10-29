@@ -1,6 +1,6 @@
 package com.club.athletics.capability;
 
-/** Anything that can be placed on a leaderboard. Higher score means better performance. */
+//something that can be put on a leaderboard
 public interface PerformanceScorable {
 
     double calculatePerformanceScore();

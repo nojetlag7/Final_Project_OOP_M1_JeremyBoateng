@@ -2,7 +2,7 @@ package com.club.athletics.io;
 
 import java.io.IOException;
 
-/** Source of the club's initial data; the rest of the app does not know the storage format. */
+//loads the club data, doesn't care if it's csv or something else
 public interface DataLoader {
 
     ClubData load() throws IOException;

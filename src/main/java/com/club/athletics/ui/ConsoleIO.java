@@ -7,7 +7,7 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.Scanner;
 
-/** Typed console input. Format mistakes are re-prompted here; business rules are not checked here. */
+//reading what the user types, and asking again if the format is wrong
 public class ConsoleIO {
 
     public static final DateTimeFormatter DATE_TIME_FORMAT = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
@@ -36,6 +36,7 @@ public class ConsoleIO {
         return scanner.nextLine().trim();
     }
 
+    //asking again until they actually type something
     public String readNonBlank(String prompt) {
         while (true) {
             String value = readLine(prompt);
@@ -46,6 +47,7 @@ public class ConsoleIO {
         }
     }
 
+    //asking for a whole number
     public int readInt(String prompt) {
         while (true) {
             String value = readLine(prompt);
@@ -57,6 +59,7 @@ public class ConsoleIO {
         }
     }
 
+    //asking for a date and time like 2026-10-14 07:30
     public LocalDateTime readDateTime(String prompt) {
         while (true) {
             String value = readLine(prompt);
@@ -68,7 +71,7 @@ public class ConsoleIO {
         }
     }
 
-    /** An empty answer keeps {@code defaultValue}. */
+    //asking for a date, pressing enter keeps the default
     public LocalDate readDate(String prompt, LocalDate defaultValue) {
         while (true) {
             String value = readLine(prompt);

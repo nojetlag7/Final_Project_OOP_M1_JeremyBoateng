@@ -28,7 +28,7 @@ public class InjuryRiskReportAction implements MenuAction {
     @Override
     public void execute(ConsoleIO io) {
         List<Athlete> athletes = roster.getAthletes();
-        // Defaulting to the latest logged session keeps the report meaningful for historical data.
+        //using the latest session date if they just press enter
         LocalDate defaultDate = injuryRisk.latestSessionDate(athletes).orElse(LocalDate.now());
         LocalDate asOf = io.readDate("Assess as of [" + defaultDate + "]: ", defaultDate);
 

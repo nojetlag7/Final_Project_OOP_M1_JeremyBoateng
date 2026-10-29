@@ -6,7 +6,7 @@ import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 
-/** Loads files from a folder given on the command line, so other data sets can be used. */
+//reading the csv files from a folder passed in when the app starts
 public class DirectoryCsvSource implements CsvSource {
 
     private final Path directory;

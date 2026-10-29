@@ -3,7 +3,7 @@ package com.club.athletics.io;
 import java.io.IOException;
 import java.io.Reader;
 
-/** Opens a named CSV file, wherever it lives (classpath, folder, or in-memory in tests). */
+//opens one csv file from wherever the data is stored
 @FunctionalInterface
 public interface CsvSource {
 

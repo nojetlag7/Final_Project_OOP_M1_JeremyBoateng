@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 
-/** Runs until the user picks Exit or input ends. A failed action never ends the session. */
+//keeps showing the menu until the user exits
 public class ConsoleMenu {
 
     private static final int EXIT_OPTION = 0;
@@ -21,6 +21,7 @@ public class ConsoleMenu {
         }
     }
 
+    //looping until they pick 0 or close the input
     public void run() {
         boolean running = true;
         while (running) {
@@ -39,6 +40,7 @@ public class ConsoleMenu {
         io.println("Goodbye.");
     }
 
+    //running the chosen option and printing the error if it fails
     private void runAction(int choice) {
         MenuAction action = actions.get(choice);
         if (action == null) {
