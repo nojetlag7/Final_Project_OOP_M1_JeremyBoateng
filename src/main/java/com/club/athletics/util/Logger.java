@@ -1,6 +1,7 @@
 package com.club.athletics.util;
 
 //somewhere to send log messages
+//tests can catch them instead of printing to the console
 @FunctionalInterface
 public interface Logger {
 

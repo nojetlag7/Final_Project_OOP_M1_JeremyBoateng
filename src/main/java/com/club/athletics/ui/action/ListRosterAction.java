@@ -27,6 +27,7 @@ public class ListRosterAction implements MenuAction {
     }
 
     //printing a list, coaches and athletes each use their own summary
+    //that's why it takes Person and not one concrete type
     private static void printSection(ConsoleIO io, String title, List<? extends Person> people) {
         io.println("");
         io.println(title + " (" + people.size() + "):");

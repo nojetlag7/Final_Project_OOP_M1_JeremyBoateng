@@ -27,6 +27,7 @@ public class LeaderboardAction implements MenuAction {
 
     @Override
     //printing a leaderboard for each discipline
+    //best score first, ties share the same place
     public void execute(ConsoleIO io) {
         for (Discipline discipline : Discipline.values()) {
             List<RankedEntry<Athlete>> board = performance.rankByDiscipline(roster.getAthletes(), discipline);

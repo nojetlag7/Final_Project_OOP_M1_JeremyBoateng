@@ -26,11 +26,13 @@ public abstract class Coach extends Person {
     public abstract Discipline getDiscipline();
 
     //extra rule that depends on the type of coach
+    //swim checks the stroke, lifting checks the weight class, sprint has none
     protected abstract void checkSpecialization(Athlete athlete) throws InvalidAssignmentException;
 
     protected abstract String describeSpecialization();
 
     //checking discipline, then if the coach is full, then the extra rule
+    //every coach goes through these in the same order
     public final void validateAssignment(Athlete athlete) throws InvalidAssignmentException {
         Objects.requireNonNull(athlete, "athlete");
         if (athlete.getDiscipline() != getDiscipline()) {
@@ -45,6 +47,7 @@ public abstract class Coach extends Person {
     }
 
     //giving the athlete to this coach and taking them off the old one
+    //so they don't stay listed under two coaches
     public void assign(Athlete athlete) throws InvalidAssignmentException {
         validateAssignment(athlete);
         if (isAssigned(athlete)) {
@@ -60,6 +63,7 @@ public abstract class Coach extends Person {
     }
 
     //check to see if a coach can take more athletes
+    //compares how many they already have with their max
     public boolean hasCapacity() {
         return assignedAthletes.size() < maxAthletes;
     }

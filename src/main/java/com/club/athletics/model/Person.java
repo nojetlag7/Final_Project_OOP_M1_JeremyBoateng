@@ -3,7 +3,7 @@ package com.club.athletics.model;
 import java.time.LocalDate;
 import java.util.Objects;
 
-//shared info for athletes and coaches
+//shared info for athletes and coaches: id, name and date of birth
 public abstract class Person {
 
     private final String id;
@@ -29,6 +29,7 @@ public abstract class Person {
     }
 
     //one line for the lists, each type writes its own
+    //coaches show capacity, athletes show their records
     public abstract String getSummary();
 
     private static String requireText(String value, String field) {

@@ -30,6 +30,7 @@ import java.util.Objects;
 import java.util.Set;
 
 //reading the csv files, a bad row gets skipped but a missing file stops the app
+//one typo shouldn't stop the whole club from loading
 public class CsvDataLoader implements DataLoader {
 
     public static final String COACHES_FILE = "coaches.csv";
@@ -55,6 +56,7 @@ public class CsvDataLoader implements DataLoader {
     }
 
     //loading coaches, athletes and sessions
+    //the discipline column decides which type gets created
     @Override
     public ClubData load() throws IOException {
         skippedRows = 0;
@@ -82,6 +84,7 @@ public class CsvDataLoader implements DataLoader {
     }
 
     //reading one file and skipping lines that don't parse
+    //blank lines are ignored, bad lines are counted and logged
     private <T> List<T> readRows(String fileName, int expectedColumns, RowParser<T> parser) throws IOException {
         List<T> results = new ArrayList<>();
         try (BufferedReader reader = new BufferedReader(source.open(fileName))) {
@@ -99,7 +102,8 @@ public class CsvDataLoader implements DataLoader {
                 try {
                     results.add(parser.parse(split(line, expectedColumns)));
                 } catch (AthleteManagementException | IllegalArgumentException e) {
-                    // IllegalArgumentException comes from model constructors rejecting values.
+                    //bad values from the row, like a negative time
+                    //log it and keep going with the next line
                     skippedRows++;
                     logger.warn(String.format("%s line %d skipped: %s", fileName, lineNumber, e.getMessage()));
                 }
@@ -109,6 +113,7 @@ public class CsvDataLoader implements DataLoader {
     }
 
     //splitting a line and checking it has the right number of columns
+    //empty fields stay empty, they aren't dropped
     private static String[] split(String line, int expectedColumns) throws DataFormatException {
         String[] columns = line.split(",", -1);
         if (columns.length != expectedColumns) {
@@ -122,6 +127,7 @@ public class CsvDataLoader implements DataLoader {
     }
 
     //making sure this id hasn't already been used
+    //the first row with that id wins, the copy is skipped
     private static void claimId(Set<String> seenIds, String id) throws DataFormatException {
         if (!seenIds.add(id)) {
             throw new DataFormatException("duplicate id '" + id + "'");
@@ -129,6 +135,7 @@ public class CsvDataLoader implements DataLoader {
     }
 
     //building the right coach from the discipline column
+    //sprint, swim and lifting don't all read the last column the same way
     private Coach parseCoach(String[] c) throws DataFormatException {
         LocalDate dateOfBirth = parseDate(c[2], "dateOfBirth");
         Discipline discipline = parseEnum(Discipline.class, c[3], "discipline");
@@ -142,6 +149,7 @@ public class CsvDataLoader implements DataLoader {
     }
 
     //building the right athlete from the discipline column
+    //this is the only place that picks sprinter, swimmer or lifter
     private Athlete parseAthlete(String[] c) throws DataFormatException {
         LocalDate dateOfBirth = parseDate(c[2], "dateOfBirth");
         Discipline discipline = parseEnum(Discipline.class, c[3], "discipline");
@@ -156,6 +164,7 @@ public class CsvDataLoader implements DataLoader {
     }
 
     //building a session from one row
+    //bad duration or intensity gets thrown and the row is skipped
     private TrainingSession parseSession(String[] c) throws AthleteManagementException {
         LocalDateTime start;
         try {

@@ -26,6 +26,7 @@ public class AssignCoachAction implements MenuAction {
 
     @Override
     //showing who is free, then assigning the coach they pick
+    //also lists which coaches could actually take that athlete
     public void execute(ConsoleIO io) throws AthleteManagementException {
         io.println("Athletes without a coach: " + names(roster.getUnassignedAthletes()));
         Athlete athlete = roster.getAthleteOrThrow(io.readNonBlank("Athlete id: ").toUpperCase());

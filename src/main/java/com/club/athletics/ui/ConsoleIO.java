@@ -8,6 +8,7 @@ import java.time.format.DateTimeParseException;
 import java.util.Scanner;
 
 //reading what the user types, and asking again if the format is wrong
+//club rules like a full coach are checked later, not here
 public class ConsoleIO {
 
     public static final DateTimeFormatter DATE_TIME_FORMAT = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
@@ -37,6 +38,7 @@ public class ConsoleIO {
     }
 
     //asking again until they actually type something
+    //an empty line doesn't count
     public String readNonBlank(String prompt) {
         while (true) {
             String value = readLine(prompt);
@@ -48,6 +50,7 @@ public class ConsoleIO {
     }
 
     //asking for a whole number
+    //letters get rejected and it asks again
     public int readInt(String prompt) {
         while (true) {
             String value = readLine(prompt);
@@ -60,6 +63,7 @@ public class ConsoleIO {
     }
 
     //asking for a date and time like 2026-10-14 07:30
+    //anything else gets rejected and it asks again
     public LocalDateTime readDateTime(String prompt) {
         while (true) {
             String value = readLine(prompt);
@@ -72,6 +76,7 @@ public class ConsoleIO {
     }
 
     //asking for a date, pressing enter keeps the default
+    //used on the injury report so you don't have to retype the date
     public LocalDate readDate(String prompt, LocalDate defaultValue) {
         while (true) {
             String value = readLine(prompt);

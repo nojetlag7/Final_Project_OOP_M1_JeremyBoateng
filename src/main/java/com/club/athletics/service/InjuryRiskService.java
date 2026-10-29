@@ -9,9 +9,11 @@ import java.util.List;
 import java.util.Optional;
 
 //looking at week to week load to see who trained too hard
+//a high load on its own is fine, it's the sudden jump that gets flagged
 public class InjuryRiskService {
 
     //anything over 40% more than last week counts as overloaded
+    //exactly 40% is not flagged, it has to be more than that
     public static final int DEFAULT_THRESHOLD_PERCENT = 40;
     private static final int WINDOW_DAYS = 7;
 
@@ -29,6 +31,7 @@ public class InjuryRiskService {
     }
 
     //comparing the last 7 days with the 7 days before that
+    //the date passed in is the last day of the current week
     public LoadComparison compareLoads(Trackable trackable, LocalDate asOf) {
         LocalDate currentStart = asOf.minusDays(WINDOW_DAYS - 1);
         LocalDate previousEnd = currentStart.minusDays(1);
@@ -39,6 +42,7 @@ public class InjuryRiskService {
     }
 
     //flagging when an athlete has overloaded
+    //if last week had no sessions there's nothing to compare, so they're not flagged
     public boolean isAtRisk(Trackable trackable, LocalDate asOf) {
         LoadComparison loads = compareLoads(trackable, asOf);
         return loads.hasBaseline()
@@ -46,6 +50,7 @@ public class InjuryRiskService {
     }
 
     //getting the athletes that are overloaded
+    //returns the athletes, not just text, so the result can be checked
     public <T extends Trackable> List<T> flagAtRiskAthletes(Collection<T> trackables, LocalDate asOf) {
         return trackables.stream()
                 .filter(trackable -> isAtRisk(trackable, asOf))
@@ -53,6 +58,7 @@ public class InjuryRiskService {
     }
 
     //finding the most recent session date in the data
+    //the menu uses this when you just press enter on the report
     public Optional<LocalDate> latestSessionDate(Collection<? extends Trackable> trackables) {
         return trackables.stream()
                 .map(Trackable::latestSessionDate)

@@ -13,7 +13,7 @@ public class SprintCoach extends Coach {
         return Discipline.SPRINTING;
     }
 
-    //sprint coaches can take any sprinter
+    //sprint coaches can take any sprinter, there's no extra rule
     @Override
     protected void checkSpecialization(Athlete athlete) {
     }

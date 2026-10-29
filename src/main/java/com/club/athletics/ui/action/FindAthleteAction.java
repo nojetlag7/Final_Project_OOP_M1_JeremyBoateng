@@ -21,6 +21,7 @@ public class FindAthleteAction implements MenuAction {
 
     @Override
     //showing one athlete, their score and their sessions
+    //throws if the id isn't in the roster
     public void execute(ConsoleIO io) throws AthleteNotFoundException {
         Athlete athlete = roster.getAthleteOrThrow(io.readNonBlank("Athlete id: ").toUpperCase());
         io.println(athlete.getSummary());

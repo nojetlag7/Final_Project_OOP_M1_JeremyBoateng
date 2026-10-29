@@ -8,6 +8,7 @@ import java.io.Reader;
 import java.nio.charset.StandardCharsets;
 
 //reading the csv files that are bundled with the app
+//so it works no matter which folder you start it from
 public class ClasspathCsvSource implements CsvSource {
 
     private final String folder;

@@ -6,7 +6,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Objects;
 
-//one training session that already happened
+//one training session that already happened, so it can't be edited after
 public final class TrainingSession {
 
     public static final int MIN_INTENSITY = 1;
@@ -33,6 +33,7 @@ public final class TrainingSession {
     }
 
     //calculating the load of a single training session
+    //minutes times intensity, a harder or longer session counts for more
     public int getLoad() {
         return durationMinutes * intensity;
     }

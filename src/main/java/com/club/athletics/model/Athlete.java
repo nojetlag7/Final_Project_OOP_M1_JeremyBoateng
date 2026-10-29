@@ -21,9 +21,11 @@ public abstract class Athlete extends Person implements PerformanceScorable, Tra
     }
 
     //each subclass says which discipline it is
+    //it's not stored separately, so a swimmer can't be marked as a sprinter
     public abstract Discipline getDiscipline();
 
     //the extra info shown on the athlete's line
+    //times for sprinters, stroke for swimmers, weight for lifters
     protected abstract String describeAttributes();
 
     public Optional<Coach> getCoach() {
@@ -31,11 +33,13 @@ public abstract class Athlete extends Person implements PerformanceScorable, Tra
     }
 
     //only Coach.assign should call this so both sides stay linked
+    //the athlete points at the coach and the coach's list points back
     void setCoach(Coach coach) {
         this.coach = coach;
     }
 
     //adding a session onto this athlete
+    //it has to be for this athlete's id, not someone else's
     public void recordSession(TrainingSession session) {
         Objects.requireNonNull(session, "session");
         if (!session.getAthleteId().equals(getId())) {
@@ -49,7 +53,7 @@ public abstract class Athlete extends Person implements PerformanceScorable, Tra
         return Collections.unmodifiableList(sessions);
     }
 
-    //adding up the load between two dates
+    //adding up the load between two dates, both days included
     @Override
     public int trainingLoadBetween(LocalDate fromInclusive, LocalDate toInclusive) {
         return sessions.stream()
@@ -60,7 +64,8 @@ public abstract class Athlete extends Person implements PerformanceScorable, Tra
     }
 
     //finding this athlete's most recent session
-    @Override
+    //empty if they haven't trained yet
+    @Override 
     public Optional<LocalDate> latestSessionDate() {
         return sessions.stream()
                 .map(TrainingSession::getDate)

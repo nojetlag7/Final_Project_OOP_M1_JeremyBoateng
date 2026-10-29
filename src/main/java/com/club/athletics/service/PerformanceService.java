@@ -12,6 +12,7 @@ import java.util.List;
 public class PerformanceService {
 
     //sorting best score first, same scores share a rank
+    //two people on the same score both get 1, the next one is 3
     public <T extends PerformanceScorable> List<RankedEntry<T>> rank(Collection<T> competitors) {
         List<T> sorted = competitors.stream()
                 .sorted(Comparator.comparingDouble((T c) -> c.calculatePerformanceScore()).reversed())
@@ -31,6 +32,7 @@ public class PerformanceService {
     }
 
     //ranking only the athletes in one discipline
+    //sprinters, swimmers and lifters aren't mixed together
     public List<RankedEntry<Athlete>> rankByDiscipline(Collection<Athlete> athletes, Discipline discipline) {
         return rank(athletes.stream()
                 .filter(athlete -> athlete.getDiscipline() == discipline)

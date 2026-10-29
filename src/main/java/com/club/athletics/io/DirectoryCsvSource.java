@@ -7,6 +7,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 
 //reading the csv files from a folder passed in when the app starts
+//lets you try a different data set without changing the code
 public class DirectoryCsvSource implements CsvSource {
 
     private final Path directory;

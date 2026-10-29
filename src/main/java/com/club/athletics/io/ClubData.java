@@ -10,6 +10,7 @@ import java.util.List;
 import java.util.Map;
 
 //what came out of the files, coaches aren't assigned yet
+//assignments are just requests until the roster checks them
 public record ClubData(List<Athlete> athletes,
                        List<Coach> coaches,
                        Map<String, String> requestedAssignments,
@@ -20,6 +21,7 @@ public record ClubData(List<Athlete> athletes,
         athletes = List.copyOf(athletes);
         coaches = List.copyOf(coaches);
         //keeping the file order so the first athletes get the last free spots
+        //if a coach only has one place left, whoever is earlier in the file gets it
         requestedAssignments = Collections.unmodifiableMap(new LinkedHashMap<>(requestedAssignments));
         sessions = List.copyOf(sessions);
     }

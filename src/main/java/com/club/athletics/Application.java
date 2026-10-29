@@ -26,13 +26,14 @@ import java.nio.file.Path;
 import java.util.List;
 import java.util.Scanner;
 
-//starts the app
+//starts the app, this class only connects the pieces together
 public final class Application {
 
     private Application() {
     }
 
-    //loading the files then opening the menu, a folder can be passed in
+    //loading the files then opening the menu
+    //if you pass a folder it loads from there, otherwise from the built-in files
     public static void main(String[] args) {
         Logger logger = new ConsoleLogger();
         CsvSource source = args.length > 0

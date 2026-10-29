@@ -23,6 +23,7 @@ public class WeightliftingCoach extends Coach {
     }
 
     //check if the lifter is under the weight class this coach can take
+    //heavier classes need a coach certified up to that weight
     @Override
     protected void checkSpecialization(Athlete athlete) throws InvalidAssignmentException {
         Weightlifter lifter = (Weightlifter) athlete;

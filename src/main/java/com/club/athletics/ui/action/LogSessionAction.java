@@ -25,6 +25,7 @@ public class LogSessionAction implements MenuAction {
     @Override
     public void execute(ConsoleIO io) throws AthleteManagementException {
         //checking the athlete exists before asking for the rest
+        //so a typo fails straight away instead of after all the other questions
         Athlete athlete = roster.getAthleteOrThrow(io.readNonBlank("Athlete id: ").toUpperCase());
         LocalDateTime start = io.readDateTime("Start (yyyy-MM-dd HH:mm): ");
         int duration = io.readInt("Duration in minutes: ");

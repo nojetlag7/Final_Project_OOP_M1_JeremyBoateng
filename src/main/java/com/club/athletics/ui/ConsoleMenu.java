@@ -7,6 +7,7 @@ import java.util.Map;
 import java.util.TreeMap;
 
 //keeps showing the menu until the user exits
+//a failed option prints the error and comes back to the menu
 public class ConsoleMenu {
 
     private static final int EXIT_OPTION = 0;
@@ -22,6 +23,7 @@ public class ConsoleMenu {
     }
 
     //looping until they pick 0 or close the input
+    //bad numbers just ask again, they don't crash the app
     public void run() {
         boolean running = true;
         while (running) {
@@ -41,6 +43,7 @@ public class ConsoleMenu {
     }
 
     //running the chosen option and printing the error if it fails
+    //unknown numbers are told they're not an option
     private void runAction(int choice) {
         MenuAction action = actions.get(choice);
         if (action == null) {

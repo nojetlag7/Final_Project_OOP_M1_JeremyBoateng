@@ -8,6 +8,7 @@ import com.club.athletics.util.Logger;
 import java.util.Map;
 
 //putting the file data onto the roster, bad assignments get skipped
+//the csv goes through the same checks as typing it in the menu
 public class RosterInitializer {
 
     private final Logger logger;
@@ -17,6 +18,7 @@ public class RosterInitializer {
     }
 
     //applying the coaches and sessions from the files
+    //if one fails it gets logged and the rest still load
     public RosterService initialize(ClubData data) {
         RosterService roster = new RosterService(data.athletes(), data.coaches());
 

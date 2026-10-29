@@ -5,6 +5,7 @@ import java.time.LocalDate;
 public class Weightlifter extends Athlete {
 
     //lifting 4 times the weight class scores 100, same scale as the others
+    //so a lifter and a sprinter can both sit around 100 for a strong result
     private static final double SCALE = 25.0;
 
     private final double weightClassKg;
@@ -26,6 +27,7 @@ public class Weightlifter extends Athlete {
     }
 
     //calculating the score from the total lifted compared to the weight class
+    //lifting more for your size scores higher, not just lifting more
     @Override
     public double calculatePerformanceScore() {
         return totalLiftedKg / weightClassKg * SCALE;

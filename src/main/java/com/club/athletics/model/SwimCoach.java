@@ -26,6 +26,7 @@ public class SwimCoach extends Coach {
     }
 
     //check if the coach is certified for this stroke
+    //a freestyle coach can't take a butterfly swimmer
     @Override
     protected void checkSpecialization(Athlete athlete) throws InvalidAssignmentException {
         Swimmer swimmer = (Swimmer) athlete;

@@ -6,6 +6,7 @@ import java.util.Objects;
 public class Swimmer extends Athlete {
 
     //a 25.00s freestyle lap scores 100
+    //slower strokes are adjusted separately so this stays a freestyle reference
     private static final double REFERENCE_LAP_SECONDS = 25.0;
     private static final double SCALE = 100.0;
 
@@ -27,6 +28,7 @@ public class Swimmer extends Athlete {
     }
 
     //calculating the score from the lap time and the stroke
+    //the stroke multiplier stops breaststroke looking worse just for being slower
     @Override
     public double calculatePerformanceScore() {
         return (REFERENCE_LAP_SECONDS / bestLapSeconds) * stroke.getScoreMultiplier() * SCALE;
